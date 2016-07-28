@@ -235,6 +235,15 @@ void rtw_odm_adaptivity_dc_backoff_msg(void *sel, _adapter *adapter)
 	DBG_871X_SEL_NL(sel, "RTW_ADAPTIVITY_DC_BACKOFF:%u\n", regsty->adaptivity_dc_backoff);
 }
 
+void rtw_odm_adaptivity_config_msg(void *sel, _adapter *adapter)
+{
+	rtw_odm_adaptivity_ver_msg(sel, adapter);
+	rtw_odm_adaptivity_en_msg(sel, adapter);
+	rtw_odm_adaptivity_mode_msg(sel, adapter);
+	rtw_odm_adaptivity_dml_msg(sel, adapter);
+	rtw_odm_adaptivity_dc_backoff_msg(sel, adapter);
+}
+
 bool rtw_odm_adaptivity_needed(_adapter *adapter)
 {
 	struct registry_priv *regsty = &adapter->registrypriv;
@@ -244,14 +253,6 @@ bool rtw_odm_adaptivity_needed(_adapter *adapter)
 	if (regsty->adaptivity_en == RTW_ADAPTIVITY_EN_ENABLE)
 		ret = _TRUE;
 
-	if (ret == _TRUE) {
-		rtw_odm_adaptivity_ver_msg(RTW_DBGDUMP, adapter);
-		rtw_odm_adaptivity_en_msg(RTW_DBGDUMP, adapter);
-		rtw_odm_adaptivity_mode_msg(RTW_DBGDUMP, adapter);
-		rtw_odm_adaptivity_dml_msg(RTW_DBGDUMP, adapter);
-		rtw_odm_adaptivity_dc_backoff_msg(RTW_DBGDUMP, adapter);
-	}
-
 	return ret;
 }
 
@@ -260,11 +261,7 @@ void rtw_odm_adaptivity_parm_msg(void *sel, _adapter *adapter)
 	HAL_DATA_TYPE *pHalData = GET_HAL_DATA(adapter);
 	DM_ODM_T *odm = &pHalData->odmpriv;
 
-	rtw_odm_adaptivity_ver_msg(sel, adapter);
-	rtw_odm_adaptivity_en_msg(sel, adapter);
-	rtw_odm_adaptivity_mode_msg(sel, adapter);
-	rtw_odm_adaptivity_dml_msg(sel, adapter);
-	rtw_odm_adaptivity_dc_backoff_msg(sel, adapter);
+	rtw_odm_adaptivity_config_msg(sel, adapter);
 
 	DBG_871X_SEL_NL(sel, "%10s %16s\n"
 		, "TH_L2H_ini", "TH_EDCCA_HL_diff");

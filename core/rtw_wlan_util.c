@@ -465,6 +465,13 @@ void Switch_DM_Func(_adapter *padapter, u32 mode, u8 enable)
 		rtw_hal_set_hwreg(padapter, HW_VAR_DM_FUNC_CLR, (u8 *)(&mode));
 }
 
+void ctrl_dm_func_for_offchannel(_adapter *padapter , u32 mode)
+{
+	Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
+	if (rtw_odm_adaptivity_needed(padapter))
+		rtw_hal_set_hwreg(padapter, HW_VAR_DM_FUNC_SET, (u8 *) (&mode)); 
+}
+
 static void Set_NETYPE1_MSR(_adapter *padapter, u8 type)
 {
 	rtw_hal_set_hwreg(padapter, HW_VAR_MEDIA_STATUS1, (u8 *)(&type));

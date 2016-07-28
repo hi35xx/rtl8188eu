@@ -12705,7 +12705,8 @@ u8 sitesurvey_cmd_hdl(_adapter *padapter, u8 *pbuf)
 
 		//disable dynamic functions, such as high power, DIG
 		Save_DM_Func_Flag(padapter);
-		Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
+		//Switch_DM_Func(padapter, DYNAMIC_FUNC_DISABLE, _FALSE);
+		ctrl_dm_func_for_offchannel(padapter,BIT13); /* BIT13 = ODM_BB_ADAPTIVITY */
 
 		//config the initial gain under scaning, need to write the BB registers
 #ifdef CONFIG_P2P

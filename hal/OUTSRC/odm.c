@@ -2392,6 +2392,12 @@ ODM_Write_DIG(
 
 	if(pDM_DigTable->CurIGValue != CurrentIGI)
 	{
+
+		/*Add by YuChen for USB IO too slow issue*/
+		if ((pDM_Odm->SupportAbility & ODM_BB_ADAPTIVITY) && (CurrentIGI > pDM_DigTable->CurIGValue))
+			Phydm_Adaptivity(pDM_Odm, CurrentIGI);
+
+	
 		//1 Set IGI value
 		if(pDM_Odm->SupportPlatform & (ODM_WIN|ODM_CE))
 		{ 

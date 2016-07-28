@@ -158,7 +158,8 @@ int ips_leave(_adapter * padapter)
 	}
 #endif //DBG_CHECK_FW_PS_STATE
 	_exit_pwrlock(&pwrpriv->lock);
-
+	DBG_871X("Run rtw_hal_dm_watchdog 20150724!!\n");
+	rtw_hal_dm_watchdog(padapter);
 #ifdef CONFIG_BT_COEXIST
 	if (_SUCCESS == ret)
 		rtw_btcoex_IpsNotify(padapter, IPS_NONE);
